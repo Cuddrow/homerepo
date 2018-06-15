@@ -99,6 +99,24 @@ class Player:
 
         return decision
 
+    def Grudgy(self, previous_games, player_number, current_round):
+        if current_round == 0:
+            print("Grudgy chosen!")
+
+        if player_number == 0:
+            # Determines itself to be player 1 and the other to be player 2
+            other_player = 1
+        elif player_number == 1:
+            # Determines itself to be player 2 and the other to be player 1
+            other_player = 0
+
+        if 1 in previous_games[other_player]:
+            decision = 1
+        else:
+            decision = 0
+
+        return decision
+
     def Play(self, previous_games, player_number, current_round):
         if self.name == "cooperator":
             return self.Cooperator(previous_games, player_number, current_round)
@@ -120,6 +138,9 @@ class Player:
 
         elif self.name == "angryflop":
             return self.AngryFlop(previous_games, player_number, current_round)
+
+        elif self.name == "grudgy":
+            return self.Grudgy(previous_games, player_number, current_round)
 
         else:
             print("No strategy chosen!")
