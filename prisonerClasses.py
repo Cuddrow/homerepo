@@ -117,31 +117,75 @@ class Player:
 
         return decision
 
-    def Play(self, previous_games, player_number, current_round):
-        if self.name == "cooperator":
-            return self.Cooperator(previous_games, player_number, current_round)
+    def Tit4Tat(self, previous_games, player_number, current_round):
+        if player_number == 0:
+            # Determines itself to be player 1 and the other to be player 2
+            other_player = 1
+        elif player_number == 1:
+            # Determines itself to be player 2 and the other to be player 1
+            other_player = 0
 
-        elif self.name == "defector":
-            return self.Defector(previous_games, player_number, current_round)
+        if current_round == 0:
+            print("Tit4tat chosen!")
+            decision = 0
+        elif current_round != 0:
+            print("Other player: {} Current round: {}".format(other_player,current_round))
+            decision = previous_games[other_player][current_round-1]
 
-        elif self.name == "randomy":
-            return self.Randomy(previous_games, player_number, current_round)
+        return decision
 
-        elif self.name == "opposite":
-            return self.Opposite(previous_games, player_number, current_round)
+    def Tit42Tat(self, previous_games, player_number, current_round):
+        if player_number == 0:
+            # Determines itself to be player 1 and the other to be player 2
+            other_player = 1
+        elif player_number == 1:
+            # Determines itself to be player 2 and the other to be player 1
+            other_player = 0
 
-        elif self.name == "mefirst":
-            return self.MeFirst(previous_games, player_number, current_round)
-
-        elif self.name == "happyflop":
-            return self.HappyFlop(previous_games, player_number, current_round)
-
-        elif self.name == "angryflop":
-            return self.AngryFlop(previous_games, player_number, current_round)
-
-        elif self.name == "grudgy":
-            return self.Grudgy(previous_games, player_number, current_round)
-
+        if current_round == 0:
+            print("Tit4tat chosen!")
+            decision = 0
+        elif current_round == 1:
+            decision = previous_games[other_player][current_round-1]
+        elif current_round >= 2:
+            if 1 in previous_games[other_player][(current_round-2):]:
+                decision = 1
         else:
-            print("No strategy chosen!")
-            return 3
+            decision = 0
+
+        return decision
+
+
+    def Play(self, previous_games, player_number, current_round):
+        for i in range(10):
+            n = str(i)
+            if self.name == "cooperator" or self.name == ("cooperator" + n):
+                return self.Cooperator(previous_games, player_number, current_round)
+
+            elif self.name == "defector" or self.name == ("defector" + n):
+                return self.Defector(previous_games, player_number, current_round)
+
+            elif self.name == "randomy" or self.name == ("randomy" + n):
+                return self.Randomy(previous_games, player_number, current_round)
+
+            elif self.name == "opposite" or self.name == ("opposite" + n):
+                return self.Opposite(previous_games, player_number, current_round)
+
+            elif self.name == "mefirst"  or self.name == ("mefirst" + n):
+                return self.MeFirst(previous_games, player_number, current_round)
+
+            elif self.name == "happyflop" or self.name == ("happyflop" + n):
+                return self.HappyFlop(previous_games, player_number, current_round)
+
+            elif self.name == "angryflop" or self.name == ("angryflop" + n):
+                return self.AngryFlop(previous_games, player_number, current_round)
+
+            elif self.name == "grudgy" or self.name == ("grudgy" + n):
+                return self.Grudgy(previous_games, player_number, current_round)
+
+            elif self.name == "tit4tat" or self.name == ("tit4tat" + n):
+                return self.Tit4Tat(previous_games, player_number, current_round)
+
+
+        print("No strategy chosen!")
+        return 3
