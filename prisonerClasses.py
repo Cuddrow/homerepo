@@ -129,12 +129,13 @@ class Player:
             print("Tit4tat chosen!")
             decision = 0
         elif current_round != 0:
-            print("Other player: {} Current round: {}".format(other_player,current_round))
+            #print("Other player: {} Current round: {}".format(other_player,current_round))
             decision = previous_games[other_player][current_round-1]
 
         return decision
 
     def Tit42Tat(self, previous_games, player_number, current_round):
+        # Tit42Tat retaliates if any of the two previous plays by the opponent were defections
         if player_number == 0:
             # Determines itself to be player 1 and the other to be player 2
             other_player = 1
@@ -143,15 +144,56 @@ class Player:
             other_player = 0
 
         if current_round == 0:
-            print("Tit4tat chosen!")
+            print("Tit42tat chosen!")
             decision = 0
         elif current_round == 1:
             decision = previous_games[other_player][current_round-1]
         elif current_round >= 2:
             if 1 in previous_games[other_player][(current_round-2):]:
                 decision = 1
+            else:
+                decision = 0
         else:
             decision = 0
+
+        return decision
+
+    def Trapper(self, previous_games, player_number, current_round):
+        if player_number == 0:
+            # Determines itself to be player 1 and the other to be player 2
+            other_player = 1
+        elif player_number == 1:
+            # Determines itself to be player 2 and the other to be player 1
+            other_player = 0
+
+        if current_round == 0:
+            print("Trapper chosen!")
+            decision = 0
+        elif current_round >= 1 and (current_round % 3) == 0:
+            decision = 1
+        else:
+            decision = previous_games[other_player][current_round-1]
+
+        return decision
+
+    def SmartTrapper(self, previous_games, player_number, current_round):
+        if player_number == 0:
+            # Determines itself to be player 1 and the other to be player 2
+            other_player = 1
+        elif player_number == 1:
+            # Determines itself to be player 2 and the other to be player 1
+            other_player = 0
+
+        if current_round == 0:
+            print("SmartTrapper chosen!")
+            decision = 0
+        elif current_round >= 1 and (current_round % 3) == 0:
+            decision = 1
+        elif current_round > 1 and (current_round % 3) == 1:
+            decision = 1
+
+        else:
+            decision = previous_games[other_player][current_round-1]
 
         return decision
 
@@ -185,6 +227,15 @@ class Player:
 
             elif self.name == "tit4tat" or self.name == ("tit4tat" + n):
                 return self.Tit4Tat(previous_games, player_number, current_round)
+
+            elif self.name == "tit42tat" or self.name == ("tit42tat" + n):
+                return self.Tit42Tat(previous_games, player_number, current_round)
+
+            elif self.name == "trapper" or self.name == ("trapper" + n):
+                return self.Trapper(previous_games, player_number, current_round)
+
+            elif self.name == "smarttrapper" or self.name == ("smarttrapper" + n):
+                return self.SmartTrapper(previous_games, player_number, current_round)
 
 
         print("No strategy chosen!")
