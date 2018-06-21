@@ -8,11 +8,8 @@ class Player:
         Player.playercount += 1
 
     def Cooperator(self, previous_games, player_number, current_round):
-        if current_round == 0:
-            print("Cooperator chosen!")
-
-        print("Current round: {}".format(current_round))
         decision = 0
+
         if decision != 1 and decision != 0:
             print("ERROR. No value decided!")
             return(3)
@@ -20,8 +17,6 @@ class Player:
         return decision
 
     def Defector(self, previous_games, player_number, current_round):
-        if current_round == 0:
-            print("Defector chosen")
 
         decision = 1
         if decision != 1 and decision != 0:
@@ -31,8 +26,6 @@ class Player:
         return decision
 
     def Randomy(self, previous_games, player_number, current_round):
-        if current_round == 0:
-            print("Randomy chosen")
 
         decision = rnd.randint(0,1)
         if decision != 1 and decision != 0:
@@ -42,8 +35,8 @@ class Player:
         return decision
 
     def Opposite(self, previous_games, player_number, current_round):
-        if current_round == 0:
-            print("Opposite chosen!")
+        #if current_round == 0:
+            #print("Opposite chosen!")
 
         if player_number == 0:
             # Determines itself to be player 1 and the other to be player 2
@@ -62,8 +55,8 @@ class Player:
         return decision
 
     def MeFirst(self, previous_games, player_number, current_round):
-        if current_round == 0:
-            print("MeFirst chosen!")
+        #if current_round == 0:
+            #print("MeFirst chosen!")
 
         if player_number == 0:
             decision = 0
@@ -74,7 +67,7 @@ class Player:
 
     def HappyFlop(self, previous_games, player_number, current_round):
         if current_round == 0:
-            print("HappyFlop chosen!")
+            #print("HappyFlop chosen!")
             decision = 0
         else:
             decision = (current_round) % 2
@@ -88,7 +81,7 @@ class Player:
 
     def AngryFlop(self, previous_games, player_number, current_round):
         if current_round == 0:
-            print("AngryFlop chosen!")
+            #print("AngryFlop chosen!")
             decision = 1
         else:
             decision = (current_round+1) % 2
@@ -100,8 +93,8 @@ class Player:
         return decision
 
     def Grudgy(self, previous_games, player_number, current_round):
-        if current_round == 0:
-            print("Grudgy chosen!")
+        #if current_round == 0:
+            #print("Grudgy chosen!")
 
         if player_number == 0:
             # Determines itself to be player 1 and the other to be player 2
@@ -126,7 +119,7 @@ class Player:
             other_player = 0
 
         if current_round == 0:
-            print("Tit4tat chosen!")
+            #print("Tit4tat chosen!")
             decision = 0
         elif current_round != 0:
             #print("Other player: {} Current round: {}".format(other_player,current_round))
@@ -144,7 +137,7 @@ class Player:
             other_player = 0
 
         if current_round == 0:
-            print("Tit42tat chosen!")
+            #print("Tit42tat chosen!")
             decision = 0
         elif current_round == 1:
             decision = previous_games[other_player][current_round-1]
@@ -167,7 +160,7 @@ class Player:
             other_player = 0
 
         if current_round == 0:
-            print("Trapper chosen!")
+            #print("Trapper chosen!")
             decision = 0
         elif current_round >= 1 and (current_round % 3) == 0:
             decision = 1
@@ -185,7 +178,7 @@ class Player:
             other_player = 0
 
         if current_round == 0:
-            print("SmartTrapper chosen!")
+            #print("SmartTrapper chosen!")
             decision = 0
         elif current_round >= 1 and (current_round % 3) == 0:
             decision = 1
