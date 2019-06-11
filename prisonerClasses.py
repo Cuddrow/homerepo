@@ -1,4 +1,5 @@
 import random as rnd
+from pylab import *
 class Player:
 
     playercount = 0
@@ -190,20 +191,43 @@ class Player:
 
         return decision
 
+    def Flipper(self, previous_games, player_number, current_round):
+        if player_number == 0:
+            other_player = 1
+        elif player_number == 1:
+            other_player = 0
+
+        if current_round == 0:
+            #print("Flipper chosen")
+            decision = 0
+        elif current_round >= 1:
+            decision = previous_games[player_number][current_round-1]
+            if previous_games[other_player][current_round-1] == 1:
+                decision = abs(decision-1)
+        '''
+        if current_round == 107:
+            print("Flipper easter egg found!\n")
+            print(" Y____(^__________^)")
+            print("°º¤ø,¸¸,ø¤º°`°º¤ø,¸,ø¤°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸")
+            print("¸,ø¤°º¤ø,¸¸,ø¤º°`°º¤ø,¸ (^__________^)____Y ,ø¤°º¤ø,¸¸")
+            print("°º¤ø,¸¸,ø¤º°`°º¤ø,¸,ø¤°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸\n")
+        '''
+        return decision
+
 
     def Play(self, previous_games, player_number, current_round):
         for i in range(10):
             n = str(i)
-            if self.name == "cooperator" or self.name == ("cooperator" + n):
+            if self.name == "cooperator" or self.name == ("cooperator" + n) or self.name == "niceguy":
                 return self.Cooperator(previous_games, player_number, current_round)
 
-            elif self.name == "defector" or self.name == ("defector" + n):
+            elif self.name == "defector" or self.name == ("defector" + n) or self.name == "badguy":
                 return self.Defector(previous_games, player_number, current_round)
 
-            elif self.name == "randomy" or self.name == ("randomy" + n):
+            elif self.name == "randomy" or self.name == ("randomy" + n) or self.name == "unpredictable" or self.name == "erratic":
                 return self.Randomy(previous_games, player_number, current_round)
 
-            elif self.name == "opposite" or self.name == ("opposite" + n):
+            elif self.name == "opposite" or self.name == ("opposite" + n) or self.name == "different":
                 return self.Opposite(previous_games, player_number, current_round)
 
             elif self.name == "mefirst"  or self.name == ("mefirst" + n):
@@ -215,20 +239,23 @@ class Player:
             elif self.name == "angryflop" or self.name == ("angryflop" + n):
                 return self.AngryFlop(previous_games, player_number, current_round)
 
-            elif self.name == "grudgy" or self.name == ("grudgy" + n):
+            elif self.name == "grudgy" or self.name == ("grudgy" + n) or self.name == "grumpy":
                 return self.Grudgy(previous_games, player_number, current_round)
 
-            elif self.name == "tit4tat" or self.name == ("tit4tat" + n):
+            elif self.name == "tit4tat" or self.name == ("tit4tat" + n) or self.name == "responsive":
                 return self.Tit4Tat(previous_games, player_number, current_round)
 
-            elif self.name == "tit42tat" or self.name == ("tit42tat" + n):
+            elif self.name == "tit42tat" or self.name == ("tit42tat" + n) or self.name == "skeptical":
                 return self.Tit42Tat(previous_games, player_number, current_round)
 
-            elif self.name == "trapper" or self.name == ("trapper" + n):
+            elif self.name == "trapper" or self.name == ("trapper" + n) or self.name == "smartguy":
                 return self.Trapper(previous_games, player_number, current_round)
 
             elif self.name == "smarttrapper" or self.name == ("smarttrapper" + n):
                 return self.SmartTrapper(previous_games, player_number, current_round)
+
+            elif self.name == "flipper" or self.name == ("flipper" + n):
+                return self.Flipper(previous_games, player_number, current_round)
 
 
         print("No strategy chosen!")
